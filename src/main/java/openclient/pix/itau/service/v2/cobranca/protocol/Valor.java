@@ -1,4 +1,4 @@
-package openclient.pix.itau.service.v2.invoice.protocol;
+package openclient.pix.itau.service.v2.cobranca.protocol;
 
 import java.io.Serializable;
 
@@ -8,17 +8,17 @@ import java.io.Serializable;
  * @author viniciosarodrigues
  *
  */
-public class InvoiceValue implements Serializable {
+public class Valor implements Serializable {
 
     private static final long serialVersionUID = 7068058093924841657L;
 
     private String original;
 
-    public InvoiceValue() {
+    public Valor() {
         super();
     }
 
-    public InvoiceValue(String original) {
+    public Valor(String original) {
         super();
         this.original = original;
     }
@@ -34,7 +34,7 @@ public class InvoiceValue implements Serializable {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("InvoiceValue [original=");
+        builder.append("Valor [original=");
         builder.append(original);
         builder.append("]");
         return builder.toString();

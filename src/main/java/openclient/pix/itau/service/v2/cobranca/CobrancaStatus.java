@@ -1,4 +1,4 @@
-package openclient.pix.itau.service.v2.invoice;
+package openclient.pix.itau.service.v2.cobranca;
 
 /**
  * Status da Cobrança
@@ -6,7 +6,7 @@ package openclient.pix.itau.service.v2.invoice;
  * @author viniciosarodrigues
  *
  */
-public enum InvoiceStatus {
+public enum CobrancaStatus {
     ATIVA,
     CONCLUIDA,
     REMOVIDA_PELO_PSP,

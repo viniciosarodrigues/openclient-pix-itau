@@ -8,17 +8,17 @@ import java.io.Serializable;
  * @author viniciosarodrigues
  *
  */
-public class RegisterWebhookRequest implements Serializable {
+public class RegistraWebhookRequest implements Serializable {
 
     private static final long serialVersionUID = -4866411464971470840L;
 
     private String webhookUrl;
 
-    public RegisterWebhookRequest() {
+    public RegistraWebhookRequest() {
         super();
     }
 
-    public RegisterWebhookRequest(String webhookUrl) {
+    public RegistraWebhookRequest(String webhookUrl) {
         super();
         this.webhookUrl = webhookUrl;
     }
@@ -34,7 +34,7 @@ public class RegisterWebhookRequest implements Serializable {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("RegisterWebhookRequest [webhookUrl=");
+        builder.append("RegistraWebhookRequest [webhookUrl=");
         builder.append(webhookUrl);
         builder.append("]");
         return builder.toString();

@@ -10,7 +10,7 @@ import openclient.pix.itau.config.ClientConfig;
 import openclient.pix.itau.rest.exceptions.HttpRestClientException;
 import openclient.pix.itau.service.AuthenticationService;
 import openclient.pix.itau.service.RestService;
-import openclient.pix.itau.service.v2.invoice.InvoiceService;
+import openclient.pix.itau.service.v2.cobranca.CobrancaService;
 import openclient.pix.itau.service.v2.webhook.WebhookService;
 
 public class PixItauClient {
@@ -57,11 +57,11 @@ public class PixItauClient {
     /**
      * Retorna uma instância do serviço de Cobranças
      * 
-     * @return InvoiceService - Serviços de cobranças
+     * @return CobrancaService - Serviços de cobranças
      * @throws HttpRestClientException
      */
-    public InvoiceService getInvoiceService() throws HttpRestClientException {
-        return getInstance(InvoiceService.class);
+    public CobrancaService getCobrancaService() throws HttpRestClientException {
+        return getInstance(CobrancaService.class);
     }
 
     /**

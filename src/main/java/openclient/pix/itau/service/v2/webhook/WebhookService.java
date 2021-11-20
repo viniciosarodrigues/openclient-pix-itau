@@ -7,8 +7,8 @@ import openclient.pix.itau.SessionHandler;
 import openclient.pix.itau.rest.RestResponse;
 import openclient.pix.itau.rest.exceptions.HttpRestClientException;
 import openclient.pix.itau.service.RestService;
-import openclient.pix.itau.service.v2.webhook.protocol.FindWebhookByIdResponse;
-import openclient.pix.itau.service.v2.webhook.protocol.RegisterWebhookRequest;
+import openclient.pix.itau.service.v2.webhook.protocol.BuscaWebhookResponse;
+import openclient.pix.itau.service.v2.webhook.protocol.RegistraWebhookRequest;
 
 /**
  * Camada de serviços para criaçãod e Webhook
@@ -31,14 +31,14 @@ public class WebhookService extends RestService {
      * @param pixKey Chave PIX
      * @throws HttpRestClientException
      */
-    public FindWebhookByIdResponse findByPIXKey(String pixKey) throws HttpRestClientException {
-        if (pixKey == null || pixKey.isEmpty()) {
+    public BuscaWebhookResponse buscaPorChavePix(String chavePix) throws HttpRestClientException {
+        if (chavePix == null || chavePix.isEmpty()) {
             throw new HttpRestClientException("A chave pix não pode ser nula na consulta de webhook por chave PIX", null, 400);
         }
-        LOGGER.info("Efetuando busca de webhook por chave PIX no servidor :: {}", pixKey);
+        LOGGER.info("Efetuando busca de webhook por chave PIX no servidor :: {}", chavePix);
 
-        FindWebhookByIdResponse response =
-                                         sessionHandler.get(SERVICE_RELATIVE_URL.concat("/" + pixKey), null, FindWebhookByIdResponse.class);
+        BuscaWebhookResponse response =
+                                      sessionHandler.get(SERVICE_RELATIVE_URL.concat("/" + chavePix), null, BuscaWebhookResponse.class);
 
         LOGGER.info("Webhook encontrado :: {}", response.getWebhookUrl());
 
@@ -51,13 +51,13 @@ public class WebhookService extends RestService {
      * @param request Requisição de registro de webhook
      * @throws HttpRestClientException
      */
-    public void register(String pixKey, RegisterWebhookRequest request) throws HttpRestClientException {
+    public void registra(String chavePix, RegistraWebhookRequest request) throws HttpRestClientException {
         if (request == null) {
             throw new HttpRestClientException("A requisição de registro de webhook não pode ser nula", null, 400);
         }
         LOGGER.info("Efetuando registro de webhook por chave PIX no servidor do Itaú :: {}", request.getWebhookUrl());
 
-        sessionHandler.put(SERVICE_RELATIVE_URL.concat("/" + pixKey), request, RestResponse.class);
+        sessionHandler.put(SERVICE_RELATIVE_URL.concat("/" + chavePix), request, RestResponse.class);
 
         LOGGER.info("Webhook registrado :: {}", request.getWebhookUrl());
 

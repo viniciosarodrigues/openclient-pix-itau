@@ -1,8 +1,6 @@
-package openclient.pix.itau.service.v2.invoice.protocol;
+package openclient.pix.itau.service.v2.cobranca.protocol;
 
 import java.io.Serializable;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Representa uma pessoa física ou jurídica da cobrança PIX
@@ -10,34 +8,33 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author viniciosarodrigues
  *
  */
-public class InvoicePerson implements Serializable {
+public class Pessoa implements Serializable {
 
     private static final long serialVersionUID = 5630521026904423020L;
 
-    @JsonProperty("nome")
-    private String name;
+    private String nome;
 
     private String cnpj;
 
     private String cpf;
 
-    public InvoicePerson() {
+    public Pessoa() {
         super();
     }
 
-    public InvoicePerson(String name, String cnpj, String cpf) {
+    public Pessoa(String nome, String cnpj, String cpf) {
         super();
-        this.name = name;
+        this.nome = nome;
         this.cnpj = cnpj;
         this.cpf = cpf;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getCnpj() {
@@ -59,8 +56,8 @@ public class InvoicePerson implements Serializable {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("InvoicePerson [name=");
-        builder.append(name);
+        builder.append("Pessoa [nome=");
+        builder.append(nome);
         builder.append(", cnpj=");
         builder.append(cnpj);
         builder.append(", cpf=");

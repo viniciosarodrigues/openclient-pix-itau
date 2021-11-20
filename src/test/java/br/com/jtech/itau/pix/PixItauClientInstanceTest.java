@@ -14,18 +14,18 @@ import openclient.pix.itau.PixItauClient;
 import openclient.pix.itau.config.ClientConfig;
 import openclient.pix.itau.config.ClientConfigBuilder;
 import openclient.pix.itau.rest.exceptions.HttpRestClientException;
-import openclient.pix.itau.service.v2.invoice.protocol.AdditionalInformation;
-import openclient.pix.itau.service.v2.invoice.protocol.CreateInvoiceRequest;
-import openclient.pix.itau.service.v2.invoice.protocol.InvoiceCalendar;
-import openclient.pix.itau.service.v2.invoice.protocol.InvoicePerson;
-import openclient.pix.itau.service.v2.invoice.protocol.InvoiceValue;
-import openclient.pix.itau.service.v2.webhook.protocol.RegisterWebhookRequest;
+import openclient.pix.itau.service.v2.cobranca.protocol.Calendario;
+import openclient.pix.itau.service.v2.cobranca.protocol.CriaCobrancaRequest;
+import openclient.pix.itau.service.v2.cobranca.protocol.InformacaoAdicional;
+import openclient.pix.itau.service.v2.cobranca.protocol.Pessoa;
+import openclient.pix.itau.service.v2.cobranca.protocol.Valor;
+import openclient.pix.itau.service.v2.webhook.protocol.RegistraWebhookRequest;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PixItauClientInstanceTest {
 
-    private static final String CLIENTSECRET = "SEU_CLIENT_SECRET_AQUI";
-    private static final String CLIENTID = "SEU_CLIENT_ID_AQUI";
+    private static final String CLIENTSECRET = "";
+    private static final String CLIENTID = "";
     protected static PixItauClient client;
     protected static ClientConfig config;
 
@@ -56,47 +56,47 @@ public class PixItauClientInstanceTest {
     }
 
     @Test
-    public void V00001_checkSuccessConnection() {
+    public void V00001_checaConexao() {
         assertNotNull(client);
     }
 
     @Test
-    public void V00002_checkWebhookServiceInstance() throws HttpRestClientException {
+    public void V00002_checaWebhookService() throws HttpRestClientException {
         assertNotNull(client.getWebhookService());
     }
 
     @Test(expected = Test.None.class)
-    public void V00003_registerWebhookSuccess() throws HttpRestClientException {
-        client.getWebhookService().register(PIX_KEY, new RegisterWebhookRequest(WEBHOOK_URL));
+    public void V00003_registraWebhookComSucesso() throws HttpRestClientException {
+        client.getWebhookService().registra(PIX_KEY, new RegistraWebhookRequest(WEBHOOK_URL));
     }
 
     @Test
-    public void V00004_findWebhookSuccess() throws HttpRestClientException {
-        assertNotNull(client.getWebhookService().findByPIXKey(PIX_KEY));
+    public void V00004_buscaWebhookComSucesso() throws HttpRestClientException {
+        assertNotNull(client.getWebhookService().buscaPorChavePix(PIX_KEY));
     }
 
     @Test
-    public void V00005_checkInvoiceServiceInstance() throws HttpRestClientException {
-        assertNotNull(client.getInvoiceService());
+    public void V00005_checaCobrancaService() throws HttpRestClientException {
+        assertNotNull(client.getCobrancaService());
     }
 
     @Test
-    public void V00006_createInvoice() throws HttpRestClientException {
-        assertNotNull(client.getInvoiceService().create(PixItauClientInstanceTest.buildInvoiceRequest()));
+    public void V00006_criaCobrancaComSucesso() throws HttpRestClientException {
+        assertNotNull(client.getCobrancaService().cria(PixItauClientInstanceTest.criaRequisicaoDeCriacaoDeCobranca()));
     }
 
     @Test
-    public void V00007_findInvoiceByTxId() throws HttpRestClientException {
-        assertNotNull(client.getInvoiceService().findByTxid(TXID_DEFAULT));
+    public void V00007_buscaCobrancaPorTXID() throws HttpRestClientException {
+        assertNotNull(client.getCobrancaService().buscaCobrancaPorTXID(TXID_DEFAULT));
     }
 
-    private static CreateInvoiceRequest buildInvoiceRequest() {
-        CreateInvoiceRequest request = new CreateInvoiceRequest();
-        request.setPixKey(PIX_KEY);
-        request.setCalendar(new InvoiceCalendar(3600, null));
-        request.setValue(new InvoiceValue(INVOICE_VALUE));
-        request.setDebtor(new InvoicePerson(CUSTOMER_NAME, null, CPF));
-        request.setAdditionalInformation(Arrays.asList(new AdditionalInformation(INF_ADD_KEY, INF_ADD_VALUE)));
+    private static CriaCobrancaRequest criaRequisicaoDeCriacaoDeCobranca() {
+        CriaCobrancaRequest request = new CriaCobrancaRequest();
+        request.setChave(PIX_KEY);
+        request.setCalendario(new Calendario(3600, null));
+        request.setValor(new Valor(INVOICE_VALUE));
+        request.setDevedor(new Pessoa(CUSTOMER_NAME, null, CPF));
+        request.setInfoAdicionais(Arrays.asList(new InformacaoAdicional(INF_ADD_KEY, INF_ADD_VALUE)));
         return request;
     }
 }
