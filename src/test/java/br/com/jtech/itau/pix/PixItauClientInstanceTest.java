@@ -24,8 +24,8 @@ import openclient.pix.itau.service.v2.webhook.protocol.RegisterWebhookRequest;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PixItauClientInstanceTest {
 
-    private static final String CLIENTSECRET = "4b4f01b8-945a-4caf-991e-9e84b516fc38";
-    private static final String CLIENTID = "8a1dab24-0d3d-447b-919d-089af50d80b1";
+    private static final String CLIENTSECRET = "SEU_CLIENT_SECRET_AQUI";
+    private static final String CLIENTID = "SEU_CLIENT_ID_AQUI";
     protected static PixItauClient client;
     protected static ClientConfig config;
 
